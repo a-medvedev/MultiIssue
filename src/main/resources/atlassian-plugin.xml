@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<atlassian-plugin key="${project.groupId}.${project.artifactId}" name="${project.name}" plugins-version="2">
+  <plugin-info>
+    <description>${project.description}</description>
+    <version>${project.version}</version>
+    <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+    <param name="plugin-icon">images/pluginIcon.png</param>
+    <param name="plugin-logo">images/pluginLogo.png</param>
+  </plugin-info>
+  <!-- add our i18n resource -->
+  <resource type="i18n" name="i18n" location="MultiIssue"/>
+  <!-- add our web resources -->
+  <web-resource key="MultiIssue-resources" name="MultiIssue Web Resources">
+    <dependency>com.atlassian.auiplugin:ajs</dependency>
+    <resource type="download" name="MultiIssue.css" location="/css/MultiIssue.css"/>
+    <resource type="download" name="MultiIssue.js" location="/js/MultiIssue.js"/>
+    <resource type="download" name="images/" location="/images"/>
+    <context>MultiIssue</context>
+  </web-resource>
+  <!-- publish our component -->
+  <component key="myPluginComponent" class="mobi.ittop.jira.plugins.MultiIssue.servlet.MultiIssueServlet" public="true">
+    <interface>mobi.ittop.jira.plugins.MultiIssue.servlet.MultiIssueServlet</interface>
+  </component>
+  <!-- import from the product container -->
+  <component-import key="applicationProperties" interface="com.atlassian.sal.api.ApplicationProperties"/>
+  <servlet name="Multi Issue Sevlet" i18n-name-key="multi-issue-sevlet.name" key="multi-issue-sevlet" class="mobi.ittop.jira.plugins.MultiIssue.servlet.MultiIssueServlet">
+    <description key="multi-issue-sevlet.description">The Multi Issue Sevlet Plugin</description>
+    <url-pattern>/multiissuesevlet</url-pattern>
+  </servlet>
+  <component-import key="templateRenderer" interface="com.atlassian.templaterenderer.TemplateRenderer" filter=""/>
+  <component-import key="userManager" interface="com.atlassian.sal.api.user.UserManager" filter=""/>
+</atlassian-plugin>
